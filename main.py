@@ -9,14 +9,14 @@ import os
 
 auth = os.environ.get("NOTION_AUTH")
 notion_database_id = os.environ.get("NOTION_DATABASE_ID")
-notion_client = Client(auth=auth)
+client = Client(auth=auth)
 
 
 def fetch_all_notion_children_blocks(notion_page_id: str) -> 'list[dict]':
     has_more, start_cursor = True, None
     result = []
     while has_more:
-        resp: dict = notion_client.blocks.children.list(notion_page_id, start_cursor=start_cursor)
+        resp: dict = client.blocks.children.list(notion_page_id, start_cursor=start_cursor)
         result.extend(resp['results'])
         has_more = resp['has_more']
         start_cursor = resp['next_cursor']
@@ -35,7 +35,7 @@ def fetch_all_notion_database_pages(notion_database_id: str) -> 'list[dict]':
     has_more, start_cursor = True, None
     result = []
     while has_more:
-        resp: dict = notion_client.databases.query(notion_database_id, filter=NOTION_DATABASE_FILTER, start_cursor=start_cursor)
+        resp: dict = client.databases.query(notion_database_id, filter=NOTION_DATABASE_FILTER, start_cursor=start_cursor)
         result.extend(resp['results'])
         has_more = resp['has_more']
         start_cursor = resp['next_cursor']
