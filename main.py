@@ -7,9 +7,9 @@ from pathlib import Path
 
 import os
 
-auth = os.environ.get("NOTION_AUTH")
+notion_secret = os.environ.get("NOTION_SECRET")
 notion_database_id = os.environ.get("NOTION_DATABASE_ID")
-client = Client(auth=auth)
+client = Client(auth=notion_secret)
 
 
 def fetch_all_notion_children_blocks(notion_page_id: str) -> 'list[dict]':
