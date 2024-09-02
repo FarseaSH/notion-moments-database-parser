@@ -226,7 +226,7 @@ NotionPageProperties = namedtuple("NotionPageProperties", [
     "note",  # str
     "resource",  # str
     "resource_text",  # str
-    "resource_logo",  # str
+    "resource_image",  # str
 ])
 
 class NotionPage2MomentMDProcessor:
@@ -263,7 +263,7 @@ class NotionPage2MomentMDProcessor:
         signature = "".join(rich_text_part['plain_text'] for rich_text_part in raw_notion_page_meta_info['properties']['Signature']['rich_text'])
         resource = "".join(rich_text_part['plain_text'] for rich_text_part in raw_notion_page_meta_info['properties']['Resource']['rich_text'])
         resource_text = "".join(rich_text_part['plain_text'] for rich_text_part in raw_notion_page_meta_info['properties']['Resource Text']['rich_text'])
-        resource_logo = "".join(rich_text_part['plain_text'] for rich_text_part in raw_notion_page_meta_info['properties']['Resource Logo']['rich_text'])
+        resource_image = "".join(rich_text_part['plain_text'] for rich_text_part in raw_notion_page_meta_info['properties']['Resource Image']['rich_text'])
 
         if raw_notion_page_meta_info['properties']['Date']['date']:
             created_time = datetime.strptime(raw_notion_page_meta_info['properties']['Date']['date']['start'], NotionPage2MomentMDProcessor.TIME_FORMAT)
@@ -286,7 +286,7 @@ class NotionPage2MomentMDProcessor:
             note=note,
             resource=resource,
             resource_text=resource_text,
-            resource_logo=resource_logo,
+            resource_image=resource_image,
         )
 
 
